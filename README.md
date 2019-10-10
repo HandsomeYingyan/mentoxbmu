@@ -1,5 +1,5 @@
 
-####A simple tool...算了不秀了反正都是兰州兄弟：p
+##A simple tool...算了不秀了反正都是兰州兄弟：p
 
 
 就是在Linux连兰州电信校园网的一种办法 解除了依赖路由器关dhcp 不让开热点的问题
@@ -25,3 +25,6 @@
 https://github.com/wittybaji/ChinaNet
 
 额用Linux的自己用就行了电信换协议了Linux上校园网就难了
+
+v1 需要自己输token 和 记 sessionid
+v2 可以记住但是会产生临时文件
