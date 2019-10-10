@@ -1,0 +1,38 @@
+#这是wireshark 抓取西北民大爱校园客户端的所有操作请求
+#想造轮子的 兰州大学僧 阔以试试
+#如果是兰州其他学校的最好抓包修改 bas_name 要不会出现错误
+#本人弱鸡 只能实现到这里了 见谅:p
+#要是用于商业 小心我石锤死你哟 （什么openwrt我都晓得的啦 一发现我马上开源luci-app :p）
+#感谢wittybaji兄的项目 有些调用借自他的android app :p
+#https://github.com/wittybaji/ChinaNet
+
+
+#登录操作
+http://61.178.5.73/rasPortal/userAuth.do?req=%7B%22user_name%22%3A%22#你的电话#%22%2C%22password%22%3A%22#你的密码#%22%2C%22token_id%22%3A%22#你的token#%22%2C%22user_ip%22%3A%22#你的ip#%22%2C%22bas_name%22%3A%22LZ-AN-FJY-BAS-1.MAN.ME60-X16%22%2C%22client_type%22%3A%22PC%22%2C%22device_name%22%3A%22Win10%22%2C%22client_version%22%3A%2218.03.02.0%22%7D
+#服务端回复实例#
+######
+{"session_id":"#32位ID#","res_code":"0","msg":"成功！"}
+######
+
+#发送短信得到token
+http://61.178.5.73/rasPortal/getSms.do?req=%7B%22mobile%22%3A%22#你的电话#%22%7D
+#服务端回复实例#
+######
+{"auth_code":"#32位id#","res_code":"0","token_id":"#64位token#","msg":"短信密码下发成功！"}
+######
+#禁止wifi硬件特征码(这个好像没用==)
+
+http://61.178.5.73/rasPortal/antiPorxy.do?req=%7B%22user_name%22%3A%22#你的电话#%22%7D
+
+#服务端回复实例#
+############
+{"wifi_info":{"key_list":["Microsoft Virtual WiFi Miniport Adapter","Microsoft Hosted Network Virtual Adapter","Microsoft 托管网络虚拟适配器"],"is_wifi":"0"},"dur_time":20,"is_notic":"1","res_code":"0","nat_info":{"is_nat":"0"},"msg":"成功！","usb_info":{"is_usb":"0","key_list":["MI WLAN Adapter","TP-LINK Wireless USB Adapter","Xiaomi 802.11n USB Wireless Adapter","802.11n USB Wireless LAN Card","802.11 n WLAN"]}}
+############
+
+#退出
+http://61.178.5.73/rasPortal/quit.do?req=%7B%22session_id%22%3A%22#session id#%22%2C%22user_ip%22%3A%22#ip#%22%2C%22quit_type%22%3A%22%E6%AD%A3%E5%B8%B8%E4%B8%8B%E7%BA%BF%22%7D
+#服务端回复实例#
+#############
+{"res_code":"0","msg":"成功"}
+#############
+
